@@ -7,7 +7,9 @@
 #define SIZE 2048
 #define ITERATIONS 2000
 
-#define THREADS 1
+#define THREADS 4
+
+struct timeval startSum, endSum;
 
 void initializeGrid(bool **grid);
 void freeGridMemory(bool **grid);
@@ -17,6 +19,8 @@ int getNeighbors(bool **grid, int i, int j);
 void calculateNewGridState(bool **grid1, bool **grid2, int startIdx, int endIdx);
 int aliveCounter(bool **grid);
 void executeGame(bool **grid1, bool **grid2);
+float convertTime(struct timeval start, struct timeval end);
+
 
 void initializeGrid(bool **grid)
 {
@@ -123,8 +127,6 @@ int aliveCounter(bool **grid)
 {
     int i, j, localSum = 0;
 
-    int threadInterval = SIZE/THREADS;
-
     #pragma omp parallel for private(i, j) reduction(+:localSum)
         for(i = 0; i<SIZE; i++)
             for(j = 0; j<SIZE; j++)
@@ -159,12 +161,17 @@ void executeGame(bool **grid1, bool **grid2)
     }
 }
 
+float convertTime(struct timeval start, struct timeval end)
+{
+    return (end.tv_sec - start.tv_sec) + 1e-6*(end.tv_usec - start.tv_usec);
+}
+
 int main()
 {
     omp_set_num_threads(THREADS);
     bool **grid1, **grid2;
     int i, totalSum = 0;
-    float start, end, startSum, endSum;
+    float start, end;
 
     grid1 = malloc(SIZE * sizeof (bool*));
     initializeGrid(grid1);
@@ -179,12 +186,12 @@ int main()
     executeGame(grid1, grid2);
     end = omp_get_wtime();
 
-    startSum = omp_get_wtime();
+    gettimeofday(&startSum, NULL);
     totalSum = aliveCounter(grid1);
-    endSum = omp_get_wtime();
+    gettimeofday(&endSum, NULL);
 
     float totalTime = end - start;
-    float totalSumTime = endSum - startSum;
+    float totalSumTime = convertTime(startSum, endSum);
 
     printf("Celulas vivas: %d\n", totalSum);
     printf("Tempo de execucao das iteracoes: %.6fs\n", totalTime);
