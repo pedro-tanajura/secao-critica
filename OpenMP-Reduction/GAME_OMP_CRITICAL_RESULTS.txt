@@ -38,11 +38,11 @@ GAME OMP:
 	sys     0m0,000s 
 
 8 THREAD:
-Celulas vivas: 51
-Tempo de execucao das iteracoes: 33,185913s
-Tempo de execucao da soma: 0,489197s
-Tempo total: 33,675110s
+	Celulas vivas: 51
+	Tempo de execucao das iteracoes: 33,185913s
+	Tempo de execucao da soma: 0,489197s
+	Tempo total: 33,675110s
 
-real    0m33,699s
-user    4m28,994s
-sys     0m0,070s
+	real    0m33,699s
+	user    4m28,994s
+	sys     0m0,070s

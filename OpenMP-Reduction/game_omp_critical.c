@@ -7,7 +7,7 @@
 #define SIZE 2048
 #define ITERATIONS 2000
 
-#define THREADS 1
+#define THREADS 8
 int SUM = 0;
 
 void initializeGrid(bool **grid);
