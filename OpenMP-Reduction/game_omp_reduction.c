@@ -1,3 +1,8 @@
+/*
+    Felipe Cassiano Naranjo             RA: 142489
+    Pedro Tanajura Freire Meira Lima    RA: 140651
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

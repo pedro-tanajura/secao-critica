@@ -1,9 +1,14 @@
+"""
+    Felipe Cassiano Naranjo             RA: 142489
+    Pedro Tanajura Freire Meira Lima    RA: 140651
+"""
+
 import threading
 from time import sleep
 from random import random
 
 NUM_THREADS = 4
-ITERATIONS = 1000
+ITERATIONS = 100
 
 SUM = 0
 
@@ -32,7 +37,7 @@ def client():
     for _ in range(ITERATIONS):
         # pre-protocol
         #while RESPOND != local.id:
-        REQUEST = local.id
+        #REQUEST = local.id
 
         # critical section
         local.sum = SUM
@@ -47,14 +52,14 @@ def main():
     threads = list()
 
     threads.append(threading.Thread(target=server))
-    threads[0].start()
+    #threads[0].start()
 
     for i in range(1, NUM_THREADS):
         threads.append(threading.Thread(target=client))
         threads[i].start()
 
-    for thread in threads:
-        thread.join()
+    for i in range(1, NUM_THREADS):
+        threads[i].join()
 
     print(SUM)
 

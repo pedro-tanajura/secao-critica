@@ -1,3 +1,8 @@
+"""
+    Felipe Cassiano Naranjo             RA: 142489
+    Pedro Tanajura Freire Meira Lima    RA: 140651
+"""
+
 import threading
 from time import sleep
 from random import random
@@ -41,7 +46,7 @@ def client():
 
         # critical section
         local.sum = SUM
-        # sleep(random())
+        sleep(random())
         SUM = local.sum + 1
 
         # end of critical section
